@@ -26,13 +26,18 @@ async function fetchCommits() {
   }
 }
 
-function runSonarScanner() {
+async function runSonarScanner() {
   exec("sonar-scanner", (err, stdout, stderr) => {
     if (err) {
       console.error(`Error running SonarQube scanner: ${stderr}`);
       return;
     }
     console.log(`SonarQube analysis complete: ${stdout}`);
+      // Poll SonarQube for results
+      const response = await axios.get(`http://your-sonarqube-server/api/qualitygates/project_status?projectKey=your_project_key`);
+    
+      // Return the results
+      res.json(response.data);
   });
 }
 
