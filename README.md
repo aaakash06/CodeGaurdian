@@ -1,3 +1,7 @@
+# Code Guardian
+This project provides an API that fetches commit data from any public GitHub repository and stores it in a PostgreSQL database. It also integrates SonarQube to analyze the code quality of the repositories being fetched. The backend is built using Node.js with Express, while the commit fetching and repository analysis are handled by Python and SonarQube.
+
+
 Step to install SonarQube
 
 ```bash
