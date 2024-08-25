@@ -1,10 +1,16 @@
 import fetch from "node-fetch";
 import { exec } from "child_process";
 import * as fs from "fs";
+import { createSonarQubeProjectt } from "./create3";
+import path from "path";
 // const rp = require("request-promise-native");
 // const { exec } = require("child_process");
 // const fs = require("fs");
 // const path = require("path");
+
+import axios from "axios";
+
+const projectBranch = "main";
 
 // Configuration
 const SONARQUBE_URL = "http://localhost:9000"; // Your SonarQube URL
@@ -13,21 +19,26 @@ const SONARQUBE_TOKEN = "sqa_8eee13cae5260d01350ef723eb2322db88c6ca6a"; // Your 
 const CODE_API_URL = "https://your-code-api-url.com/fetch-code"; // API to fetch the code
 const REPORT_API_URL = "https://your-report-api-url.com/post-report"; // API to post the report
 
-// Project details
-const projectKey = "my_project_key";
-const projectName = "My Project";
+const projectKey = "";
+const projectName = "";
+
 // const REPO_DIR = path.join(__dirname, 'repo'); // Directory where the repo will be saved
-const REPO_DIR = "./../repos";
+const root_repo_dir = "./../repos";
+const REPO_DIR = "";
 // Step 1: Fetch code from another API
 async function fetchCodeFromAPI() {
   try {
-    // const response = await fetch(CODE_API_URL);
-    // if (!response.ok)
-    //   throw new Error(`Failed to fetch code. Status: ${response.status}`);
+    const response = await fetch(CODE_API_URL);
+    if (!response.ok)
+      throw new Error(`Failed to fetch code. Status: ${response.status}`);
 
-    // const codeData = await response.jsonA();
-    // const repoUrl = codeData.repoUrl;
-    const repoUrl = "https://github.com/aaakash06/CV-AK";
+    const codeData = await response.jsonA();
+    const repoUrl = codeData.repoUrl;
+    // const repoUrl = "https://github.com/aaakash06/CV-AK";
+    const parts = repoUrl.split("/");
+    projectKey = parts[parts.length - 1];
+    projectName = projectKey;
+    REPO_DIR = path.join(root_repo_dir, projectKey);
     // Clone or download the repository code
     console.log("Fetching the repository code...");
     //----------------------- this messes our repo ------------------//
@@ -37,7 +48,7 @@ async function fetchCodeFromAPI() {
         return;
       }
       console.log(`Repository cloned: ${stdout}`);
-      // createSonarQubeProject();
+      createSonarQubeProject();
     });
   } catch (error) {
     console.error("Error fetching code:", error.message);
@@ -46,25 +57,8 @@ async function fetchCodeFromAPI() {
 
 // Step 2: Create a new project in SonarQube
 async function createSonarQubeProject() {
-  const options = {
-    method: "POST",
-    uri: `${SONARQUBE_URL}/api/projects/create`,
-    qs: {
-      project: projectKey,
-      name: projectName,
-    },
-    headers: {
-      Authorization: `Basic ${Buffer.from(`${SONARQUBE_TOKEN}:`).toString(
-        "base64"
-      )}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    json: true,
-  };
-
   try {
-    const response = await rp(options);
-    console.log(`Project created successfully: ${response.project.name}`);
+    await createSonarQubeProjectt();
     analyzeCodeWithSonarQube();
   } catch (error) {
     console.error("Error creating project:", error.message);
@@ -76,7 +70,7 @@ function analyzeCodeWithSonarQube() {
   const sonarProjectFile = `
     sonar.projectKey=${projectKey}
     sonar.projectName=${projectName}
-    sonar.sources=.
+    sonar.sources=${`./../repos/${projectKey}`}
     sonar.host.url=${SONARQUBE_URL}
     sonar.login=${SONARQUBE_TOKEN}
   `;
@@ -86,13 +80,15 @@ function analyzeCodeWithSonarQube() {
     sonarProjectFile
   );
 
+  //----------------this require local installation of sonar-scanner and Environment variable-//
   exec(`cd ${REPO_DIR} && sonar-scanner`, (err, stdout, stderr) => {
     if (err) {
       console.error(`Error running SonarQube scanner: ${stderr}`);
       return;
     }
     console.log(`SonarQube analysis complete: ${stdout}`);
-    postSonarQubeReport();
+    // postSonarQubeReport();
+    fetchAnalysisReport();
   });
 }
 

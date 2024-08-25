@@ -1,16 +1,16 @@
-const scanner = require("sonarqube-scanner");
-
+import axios from "axios";
+import { scan } from "sonarqube-scanner";
 // Configuration for SonarQube
 const sonarQubeConfig = {
-  serverUrl: "http://your-sonarqube-server",
-  token: "your-sonarqube-token",
+  serverUrl: "http://localhost:9000",
+  token: "sqa_8eee13cae5260d01350ef723eb2322db88c6ca6a",
   options: {
-    "sonar.projectName": "My Project",
-    "sonar.projectDescription": "Description of my project",
-    "sonar.projectKey": "my_project_key",
-    "sonar.sources": "src", // Path to your source code
-    "sonar.tests": "test", // Path to your test files
-    "sonar.language": "js", // Language of the project
+    "sonar.projectName": "CV-AK",
+    "sonar.projectDescription": "Random Desc",
+    "sonar.projectKey": "CV-AK",
+    "sonar.sources": ".", // Path to your source code
+    "sonar.tests": "", // Path to your test files
+    "sonar.language": "python", // Language of the project
   },
 };
 
@@ -27,14 +27,18 @@ scanner(sonarQubeConfig, (error) => {
 });
 
 // Function to fetch and print the analysis report
-async function fetchAnalysisReport() {
-  const axios = require("axios");
-  const projectKey = sonarQubeConfig.options["sonar.projectKey"];
+export async function fetchAnalysisReport(
+  projectKey = "CV-AK",
+  SONARQUBE_URL = "http://localhost:9000",
+  SONARQUBE_TOKEN = "sqa_8eee13cae5260d01350ef723eb2322db88c6ca6a"
+) {
+  // const projectKey = sonarQubeConfig.options["sonar.projectKey"];
 
   try {
     // Fetch issues from SonarQube
     const response = await axios.get(
-      `${sonarQubeConfig.serverUrl}/api/issues/search`,
+      // `${sonarQubeConfig.serverUrl}/api/issues/search`,
+      `${SONARQUBE_URL}/api/issues/search`,
       {
         params: {
           componentKeys: projectKey,
@@ -42,7 +46,8 @@ async function fetchAnalysisReport() {
         },
         headers: {
           Authorization: `Basic ${Buffer.from(
-            `${sonarQubeConfig.token}:`
+            // `${sonarQubeConfig.token}:`
+            `${SONARQUBE_TOKEN}:`
           ).toString("base64")}`,
         },
       }
