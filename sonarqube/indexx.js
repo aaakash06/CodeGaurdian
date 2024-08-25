@@ -1,8 +1,10 @@
-const fetch = require("node-fetch");
-const rp = require("request-promise-native");
-const { exec } = require("child_process");
-const fs = require("fs");
-const path = require("path");
+import fetch from "node-fetch";
+import { exec } from "child_process";
+import * as fs from "fs";
+// const rp = require("request-promise-native");
+// const { exec } = require("child_process");
+// const fs = require("fs");
+// const path = require("path");
 
 // Configuration
 const SONARQUBE_URL = "http://localhost:9000"; // Your SonarQube URL
@@ -19,13 +21,13 @@ const REPO_DIR = "./../repos";
 // Step 1: Fetch code from another API
 async function fetchCodeFromAPI() {
   try {
-    const response = await fetch(CODE_API_URL);
-    if (!response.ok)
-      throw new Error(`Failed to fetch code. Status: ${response.status}`);
+    // const response = await fetch(CODE_API_URL);
+    // if (!response.ok)
+    //   throw new Error(`Failed to fetch code. Status: ${response.status}`);
 
-    const codeData = await response.json();
-    const repoUrl = codeData.repoUrl;
-
+    // const codeData = await response.jsonA();
+    // const repoUrl = codeData.repoUrl;
+    const repoUrl = "https://github.com/aaakash06/CV-AK";
     // Clone or download the repository code
     console.log("Fetching the repository code...");
     //----------------------- this messes our repo ------------------//
@@ -35,7 +37,7 @@ async function fetchCodeFromAPI() {
         return;
       }
       console.log(`Repository cloned: ${stdout}`);
-      createSonarQubeProject();
+      // createSonarQubeProject();
     });
   } catch (error) {
     console.error("Error fetching code:", error.message);
