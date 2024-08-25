@@ -29,5 +29,3 @@ export async function createSonarQubeProjectt(
     console.error("Error:", error.response.data);
   }
 }
-
-// createSonarQubeProjectt();

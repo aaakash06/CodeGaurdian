@@ -1,30 +1,4 @@
 import axios from "axios";
-import { scan } from "sonarqube-scanner";
-// Configuration for SonarQube
-const sonarQubeConfig = {
-  serverUrl: "http://localhost:9000",
-  token: "sqa_8eee13cae5260d01350ef723eb2322db88c6ca6a",
-  options: {
-    "sonar.projectName": "CV-AK",
-    "sonar.projectDescription": "Random Desc",
-    "sonar.projectKey": "CV-AK",
-    "sonar.sources": ".", // Path to your source code
-    "sonar.tests": "", // Path to your test files
-    "sonar.language": "python", // Language of the project
-  },
-};
-
-// Run SonarQube Scanner
-scanner(sonarQubeConfig, (error) => {
-  if (error) {
-    console.error("SonarQube scan failed:", error);
-    process.exit(1);
-  }
-  console.log("SonarQube scan completed successfully.");
-
-  // Fetch the analysis report
-  fetchAnalysisReport();
-});
 
 // Function to fetch and print the analysis report
 export async function fetchAnalysisReport(
@@ -57,7 +31,7 @@ export async function fetchAnalysisReport(
 
     if (issues.length === 0) {
       console.log("No issues found.");
-      return;
+      return { issues };
     }
 
     console.log(`Found ${issues.length} issue(s):`);
@@ -66,6 +40,7 @@ export async function fetchAnalysisReport(
         `- ${issue.message} (Severity: ${issue.severity}, Type: ${issue.type})`
       );
     });
+    return { issues };
   } catch (error) {
     console.error(
       "Error fetching analysis report:",

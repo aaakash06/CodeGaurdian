@@ -83,12 +83,10 @@ app.get("/api/commits", async (req, res) => {
     res.status(200).json({ commits: result.rows });
   } catch (error) {
     console.error("Error fetching commits:", error);
-    res
-      .status(500)
-      .json({
-        error: "Internal Server Error",
-        message: "Failed to fetch the commits",
-      });
+    res.status(500).json({
+      error: "Internal Server Error",
+      message: "Failed to fetch the commits",
+    });
   }
 });
 
