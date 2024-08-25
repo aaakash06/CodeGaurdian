@@ -4,7 +4,7 @@ import ReactApexChart from "react-apexcharts";
 import DefaultSelectOption from "@/components/SelectOption/DefaultSelectOption";
 
 const ChartThree: React.FC = () => {
-  const series = [65, 34, 12, 56];
+  const series = [1, 15, 5, 1];
 
   const options: ApexOptions = {
     chart: {
@@ -12,7 +12,7 @@ const ChartThree: React.FC = () => {
       type: "donut",
     },
     colors: ["#5750F1", "#5475E5", "#8099EC", "#ADBCF2"],
-    labels: ["Repositories", "Commits", "Issues", "Collaborations"],
+    labels: ["Repositories", "Commits", "Issues", "Contributors"],
     legend: {
       show: false,
       position: "bottom",
@@ -87,7 +87,7 @@ const ChartThree: React.FC = () => {
               <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-blue"></span>
               <p className="flex w-full justify-between text-body-sm font-medium text-dark dark:text-dark-6">
                 <span> Repos </span>
-                <span> 65% </span>
+                <span> 4.54% </span>
               </p>
             </div>
           </div>
@@ -96,7 +96,7 @@ const ChartThree: React.FC = () => {
               <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-blue-light"></span>
               <p className="flex w-full justify-between text-body-sm font-medium text-dark dark:text-dark-6">
                 <span> Commits </span>
-                <span> 34% </span>
+                <span> 68.18% </span>
               </p>
             </div>
           </div>
@@ -105,7 +105,7 @@ const ChartThree: React.FC = () => {
               <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-blue-light-2"></span>
               <p className="flex w-full justify-between text-body-sm font-medium text-dark dark:text-dark-6">
                 <span> Issues </span>
-                <span> 45% </span>
+                <span> 22.72% </span>
               </p>
             </div>
           </div>
@@ -114,7 +114,7 @@ const ChartThree: React.FC = () => {
               <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-blue-light-3"></span>
               <p className="flex w-full justify-between text-body-sm font-medium text-dark dark:text-dark-6">
                 <span> Collabs </span>
-                <span> 12% </span>
+                <span> 4.54% </span>
               </p>
             </div>
           </div>

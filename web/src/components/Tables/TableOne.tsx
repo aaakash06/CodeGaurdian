@@ -1,42 +1,44 @@
 import { BRAND } from "@/types/brand";
 import Image from "next/image";
+import Link from "next/link";
 
 const brandData = [
   {
-    name: "React form Validator",
-    visitors: 35,
-    revenues: "5",
-    sales: 2,
+    name: "CV-AK",
+    commits: 15,
+    issues: "5",
+    contributors: 1,
+    link:"https://github.com/aaakash06/CV-AK"
     // conversion: 4.8,
   },
-  {
-    name: "Pantry Tracker",
-    visitors: 22,
-    revenues: "4",
-    sales: 1,
-    // conversion: 4.3,
-  },
-  {
-    name: "AI-Customer",
-    visitors: 21,
-    revenues: "2",
-    sales: 4,
-    // conversion: 3.7,
-  },
-  {
-    name: "AI-FlashCard",
-    visitors: 15,
-    revenues: "3",
-    sales: 4,
-    // conversion: 2.5,
-  },
-  {
-    name: "Code Guardian",
-    visitors: 12,
-    revenues: "1",
-    sales: 4,
-    // conversion: 1.9,
-  },
+  // {
+  //   name: "Pantry Tracker",
+  //   visitors: 22,
+  //   revenues: "4",
+  //   sales: 1,
+  //   // conversion: 4.3,
+  // },
+  // {
+  //   name: "AI-Customer",
+  //   visitors: 21,
+  //   revenues: "2",
+  //   sales: 4,
+  //   // conversion: 3.7,
+  // },
+  // {
+  //   name: "AI-FlashCard",
+  //   visitors: 15,
+  //   revenues: "3",
+  //   sales: 4,
+  //   // conversion: 2.5,
+  // },
+  // {
+  //   name: "Code Guardian",
+  //   visitors: 12,
+  //   revenues: "1",
+  //   sales: 4,
+  //   // conversion: 1.9,
+  // },
 ];
 
 const TableOne = () => {
@@ -65,7 +67,7 @@ const TableOne = () => {
           </div>
           <div className="hidden px-2 pb-3.5 text-center sm:block">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Collaborators
+              Contributors
             </h5>
           </div>
           {/* <div className="hidden px-2 pb-3.5 text-center sm:block">
@@ -85,26 +87,28 @@ const TableOne = () => {
             key={key}
           >
             <div className="flex items-center gap-3.5 px-2 py-4">
-              <p className="hidden font-medium text-dark dark:text-white sm:block">
-                {brand.name}
-              </p>
+              <Link href={"https://github.com/aaakash06/CV-AK"} target="_blank">
+                <p className="hidden font-medium text-dark dark:text-white sm:block cursor-pointer" >
+                  {brand.name}
+                </p>
+              </Link>
             </div>
 
             <div className="flex items-center justify-center px-2 py-4">
               <p className="font-medium text-dark dark:text-white">
-                {brand.visitors}
+                {brand.commits}
               </p>
             </div>
 
             <div className="flex items-center justify-center px-2 py-4">
               <p className="font-medium text-red">
-                {brand.revenues}
+                {brand.issues}
               </p>
             </div>
 
             <div className="hidden items-center justify-center px-2 py-4 sm:flex">
               <p className="font-medium text-dark dark:text-white">
-                {brand.sales}
+                {brand.contributors}
               </p>
             </div>
           </div>

@@ -7,12 +7,14 @@ const ChartOne: React.FC = () => {
   const series = [
     {
       name: "Received Amount",
-      data: [0, 20, 35, 45, 35, 55, 65, 50, 65, 75, 60, 75],
-    },
-    {
-      name: "Due Amount",
-      data: [15, 9, 17, 32, 25, 68, 80, 68, 84, 94, 74, 62],
-    },
+      data: [1, 1, 1, 2, 1, 1,1,1,1, 1, 1, 1],
+      // data: [0, 20, 35, 45, 35, 55, 65, 50, 65, 75, 60, 75],
+    }
+    // ,
+    // {
+    //   name: "Due Amount",
+    //   data: [15, 9, 17, 32, 25, 68, 80, 68, 84, 94, 74, 62],
+    // },
   ];
 
   const options: ApexOptions = {
@@ -128,7 +130,7 @@ const ChartOne: React.FC = () => {
   };
 
   return (
-    <div className="col-span-12 rounded-[10px] bg-white px-7.5 pb-6 pt-7.5 shadow-1 dark:bg-gray-dark dark:shadow-card xl:col-span-7">
+    <div className="col-span-12 rounded-[10px] bg-white px-7.5 pb-6 pt-7.5 shadow-1 dark:bg-gray-dark dark:shadow-card xl:col-span-12">
       <div className="mb-3.5 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h4 className="text-body-2xlg font-bold text-dark dark:text-white">

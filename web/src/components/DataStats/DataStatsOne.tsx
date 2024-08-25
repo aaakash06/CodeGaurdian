@@ -25,7 +25,7 @@ const dataStatsList = [
     ),
     color: "#3FD97F",
     title: "Total views",
-    value: "1K",
+    value: "01",
     growthRate: 0.43,
   },
   {
@@ -47,7 +47,7 @@ const dataStatsList = [
     ),
     color: "#FF9C55",
     title: "Total Commits",
-    value: "500",
+    value: "15",
     growthRate: 4.35,
   },
   {
@@ -75,7 +75,7 @@ const dataStatsList = [
     ),
     color: "#8155FF",
     title: "Total Repos",
-    value: "245",
+    value: "01",
     growthRate: 2.59,
   },
   {
@@ -113,7 +113,7 @@ const dataStatsList = [
     ),
     color: "#18BFFF",
     title: "Total Issues",
-    value: "3.465",
+    value: "5",
     growthRate: -0.95,
   },
 ];
@@ -136,7 +136,7 @@ const DataStatsOne: React.FC<dataStats> = () => {
                 <span className="text-body-sm font-medium">{item.title}</span>
               </div>
 
-              <span
+              {/* <span
                 className={`flex items-center gap-1.5 text-body-sm font-medium ${
                   item.growthRate > 0 ? "text-green" : "text-red"
                 }`}
@@ -171,7 +171,7 @@ const DataStatsOne: React.FC<dataStats> = () => {
                     />
                   </svg>
                 )}
-              </span>
+              </span> */}
             </div>
           </div>
         ))}
