@@ -113,7 +113,7 @@ const dataStatsList = [
     ),
     color: "#18BFFF",
     title: "Total Issues",
-    value: "5",
+    value: "10",
     growthRate: -0.95,
   },
 ];

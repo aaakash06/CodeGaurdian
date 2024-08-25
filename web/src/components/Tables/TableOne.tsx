@@ -6,7 +6,7 @@ const brandData = [
   {
     name: "CV-AK",
     commits: 15,
-    issues: "5",
+    issues: "10",
     contributors: 1,
     link:"https://github.com/aaakash06/CV-AK"
     // conversion: 4.8,

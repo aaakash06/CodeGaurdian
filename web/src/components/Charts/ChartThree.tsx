@@ -4,7 +4,7 @@ import ReactApexChart from "react-apexcharts";
 import DefaultSelectOption from "@/components/SelectOption/DefaultSelectOption";
 
 const ChartThree: React.FC = () => {
-  const series = [1, 15, 5, 1];
+  const series = [1, 15, 10, 1];
 
   const options: ApexOptions = {
     chart: {
