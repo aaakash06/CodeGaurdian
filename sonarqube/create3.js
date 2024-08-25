@@ -30,4 +30,4 @@ export async function createSonarQubeProjectt(
   }
 }
 
-createSonarQubeProject();
+// createSonarQubeProjectt();
