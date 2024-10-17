@@ -35,7 +35,7 @@ let projectKey = "";
 let projectName = "";
 
 // const REPO_DIR = path.join(__dirname, 'repo'); // Directory where the repo will be saved
-const root_repo_dir = "./../repos";
+const root_repo_dir = "C:/Users/AAKASH/Desktop/codegaurdian/repos";
 let REPO_DIR = "";
 // Step 1: Fetch code from another API
 async function fetchCodeFromAPI(repoUrl) {
@@ -67,7 +67,12 @@ async function fetchCodeFromAPI(repoUrl) {
 async function createSonarQubeProject() {
   try {
     await createSonarQubeProjectt();
-    const response = await analyzeCodeWithSonarQube();
+    const response = await analyzeCodeWithSonarQube(
+      SONARQUBE_URL,
+      SONARQUBE_TOKEN,
+      projectKey,
+      projectName
+    );
     return response;
   } catch (error) {
     console.error("Error creating project:", error.message);
@@ -91,7 +96,7 @@ async function analyzeCodeWithSonarQube() {
   );
 
   //----------------this require local installation of sonar-scanner and Environment variable-//
-  const { err, stdout, stderr } = execPromise(
+  const { err, stdout, stderr } = await execPromise(
     `cd ${REPO_DIR} && sonar-scanner`
   );
 
@@ -100,7 +105,11 @@ async function analyzeCodeWithSonarQube() {
     return;
   }
   console.log(`SonarQube analysis complete: ${stdout}`);
-  const response = await fetchAnalysisReport();
+  const response = await fetchAnalysisReport(
+    projectKey,
+    SONARQUBE_URL,
+    SONARQUBE_TOKEN
+  );
   return response;
 }
 
